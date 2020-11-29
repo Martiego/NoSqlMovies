@@ -28,13 +28,7 @@ public class MovieController {
 
     @GetMapping("/findMovie/{id}")
     public Optional<Movie> getMovie(@PathVariable int id) {
-        List<Movie> movies = movieRepository.findAll();
-        for (Movie movie : movies) {
-            if (movie.getId() == id) {
-                return Optional.of(movie);
-            }
-        }
-        return Optional.empty();
+        return movieRepository.findById(id);
     }
 
     @DeleteMapping("/deleteMovie/{id}")

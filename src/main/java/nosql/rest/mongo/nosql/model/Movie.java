@@ -17,12 +17,10 @@ import java.util.List;
 @Document(collection = "Movie")
 public class Movie {
     @Id
-    private ObjectId _id;
+    private int id;
     private long budget;
-    // TODO id w kolekcjach jest 0
     private List<Genre> genres;
     private String homepage;
-    private int id;
     private List<Keyword> keywords;
     private String original_language;
     private String original_title;
