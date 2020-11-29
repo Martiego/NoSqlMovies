@@ -1,5 +1,6 @@
 package nosql.rest.mongo.nosql.controller;
 
+import nosql.rest.mongo.nosql.model.BudgetAndRate;
 import nosql.rest.mongo.nosql.model.Movie;
 import nosql.rest.mongo.nosql.model.fields.ProductionCompany;
 import nosql.rest.mongo.nosql.repository.MovieRepository;
@@ -13,13 +14,6 @@ public class MovieController {
 
     @Autowired
     private MovieRepository movieRepository;
-
-    @PostMapping("/addMovie")
-    public String saveMovie(@RequestBody Movie movie) {
-        movieRepository.save(movie);
-
-        return "Added movie with id: " + movie.getId();
-    }
 
     @GetMapping("/findAllMovies")
     public List<Movie> getMovies() {
@@ -44,7 +38,7 @@ public class MovieController {
         return moviesBetterThan;
     }
 
-    @GetMapping("/getAllProductionCompanies")
+    @GetMapping("/findAllProductionCompanies")
     public Set<ProductionCompany> getAllProductionCompanies() {
         List<Movie> movies = movieRepository.findAll();
         Set<ProductionCompany> productionCompanies = new HashSet<>();
@@ -53,6 +47,27 @@ public class MovieController {
         }
 
         return productionCompanies;
+    }
+
+    @PostMapping("/addMovie")
+    public String saveMovie(@RequestBody Movie movie) {
+        movieRepository.save(movie);
+
+        return "Added movie with id: " + movie.getId();
+    }
+
+    @PostMapping("/moviesCheaperAndBetterThan")
+    public List<Movie> moviesCheaperAndBetterThan(@RequestBody BudgetAndRate budgetAndRate) {
+        List<Movie> movies = movieRepository.findAll();
+        List<Movie> moviesCheaperAndBetter = new ArrayList<>();
+
+        movies.forEach(movie -> {
+            if (((movie.getBudget() < budgetAndRate.getBudget()) && (movie.getVote_average() > budgetAndRate.getRate()) && (movie.getBudget() != 0))) {
+                moviesCheaperAndBetter.add(movie);
+            }
+        });
+
+        return moviesCheaperAndBetter;
     }
 
     @PutMapping("/updateMovieById/{id}")

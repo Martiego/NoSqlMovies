@@ -17,24 +17,24 @@ import java.util.List;
 @Document(collection = "Movie")
 public class Movie {
     @Id
-    private int id;
-    private long budget;
+    private Integer id;
+    private Long budget;
     private List<Genre> genres;
     private String homepage;
     private List<Keyword> keywords;
     private String original_language;
     private String original_title;
     private String overview;
-    private double popularity;
+    private Double popularity;
     private List<ProductionCompany> production_companies;
     private List<ProductionCountry> production_countries;
     private Date release_date;
-    private long revenue;
+    private Long revenue;
     private Integer runtime;
     private List<SpokenLanguage> spoken_languages;
     private String status;
     private String tagline;
     private String title;
-    private double vote_average;
-    private int vote_count;
+    private Double vote_average;
+    private Integer vote_count;
 }
