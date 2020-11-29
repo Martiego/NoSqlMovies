@@ -55,6 +55,19 @@ public class MovieController {
         return productionCompanies;
     }
 
+    @PutMapping("/updateMovieById/{id}")
+    public String updateMovieById(@PathVariable int id, @RequestBody Movie movie) {
+        try {
+            Movie actualMovie = movieRepository.findById(id).orElseThrow();
+            movieRepository.delete(actualMovie);
+            movieRepository.save(movie);
+
+            return "Update movie with id " + id;
+        } catch (Exception ex) {
+            return "Movie with id " + id + " not found";
+        }
+    }
+
     @DeleteMapping("/deleteMovie/{id}")
     public String deleteBook(@PathVariable int id) {
         List<Movie> movies = movieRepository.findAll();
