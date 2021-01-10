@@ -15,6 +15,11 @@ public class MovieController {
     @Autowired
     private MovieRepository movieRepository;
 
+    @GetMapping("/test")
+    public String getTest() {
+        return "Hello world";
+    }
+
     @GetMapping("/findAllMovies")
     public List<Movie> getMovies() {
         return movieRepository.findAll();
