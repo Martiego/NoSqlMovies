@@ -8,14 +8,14 @@ services:
       - 27001:27017
     volumes:
       - .:/shared
-#  router02:
-#    image: mongo:latest
-#    container_name: router-02
-#    command: mongos --port 27017 --configdb rs-config-server/configsvr01:27017,configsvr02:27017,configsvr03:27017 --bind_ip_all
-#    volumes:
-#      - .:/shared
-#    ports:
-#      - 27002:27017
+  router02:
+    image: mongo:latest
+    container_name: router-02
+    command: mongos --port 27017 --configdb rs-config-server/configsvr01:27017,configsvr02:27017,configsvr03:27017 --bind_ip_all
+    volumes:
+      - .:/shared
+    ports:
+      - 27002:27017
 
   configsvr01:
     image: mongo:latest
